@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Derivar Paciente</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">🏥 Sistema de Hospitales</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/hospital}">Hospitales</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/doctor}">Doctores</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/paciente}">Pacientes</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 border-bottom">Derivar paciente</h1>
+
+        <form method="post" th:action="@{/paciente/guardarDerivacion}" class="mt-4">
+            <div class="mb-3">
+                <label for="doctorOrigen" class="form-label">Derivar del doctor:</label>
+                <select name="doctorOrigen" id="doctorOrigen" class="form-select" required>
+                    <option value="">-- Selecciona un doctor --</option>
+                    <option th:each="doctor : ${listaDoctores}" th:value="${doctor.id}"
+                            th:text="${doctor.nombre}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="doctorDestino" class="form-label">Al doctor:</label>
+                <select name="doctorDestino" id="doctorDestino" class="form-select" required>
+                    <option value="">-- Selecciona un doctor --</option>
+                    <option th:each="doctor : ${listaDoctores}" th:value="${doctor.id}"
+                            th:text="${doctor.nombre}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-secondary ms-2" th:href="@{/paciente}">Cancelar</a>
+        </form>
+    </div>
+</main>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
